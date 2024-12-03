@@ -20,9 +20,12 @@ bool extractColumnsFromFile(const string& filename, vector<int>& column1, vector
     return true;
 }
 
-vector<vector<int>> readVectorsFromFile(const string& filename) {
+vector<vector<int>> readMap(const string& filename) {
     vector<vector<int>> vectors;
     ifstream inputFile(filename);
+    if (!inputFile) {
+        cerr << "Error opening file: " << filename << endl;
+    }
     string line;
     while (getline(inputFile, line)) {
         vector<int> vec;
@@ -33,6 +36,21 @@ vector<vector<int>> readVectorsFromFile(const string& filename) {
             vec.push_back(num);
         }
         vectors.push_back(vec);
+    }
+    inputFile.close();
+    return vectors;
+}
+
+vector<string> getLines(const string& filename) {
+    vector<string> vectors;
+    ifstream inputFile(filename);
+    if (!inputFile) {
+        cerr << "Error opening file: " << filename << endl;
+    }
+
+    string line;
+    while (getline(inputFile, line)) {
+        vectors.push_back(line);
     }
     inputFile.close();
     return vectors;

@@ -2,12 +2,14 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <regex>
 
 template <typename T>
 void printVec(std::vector<T> vector){
     for(auto value:vector){
-        std::cout << value << std::endl;
+        std::cout << value << " ";
     }
+    std::cout << std::endl;
 }
 
 std::vector<std::string> rotate90(std::vector<std::string> map) {
@@ -61,4 +63,19 @@ std::vector<std::string> rotate45Left(const std::vector<std::string>& map) {
     }
 
     return newMap;
+}
+
+std::vector<int> extractIntegers(const std::string& input) {
+    std::regex regex_numbers(R"(\d+)");
+    std::sregex_iterator it(input.begin(), input.end(), regex_numbers);
+    std::sregex_iterator end;
+
+    std::vector<int> integers;
+
+    while (it != end) {
+        integers.push_back(std::stoi(it->str()));
+        ++it;
+    }
+
+    return integers;
 }

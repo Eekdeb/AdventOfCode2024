@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <map>
 #include <sstream>
+#include "Helper.cpp"
 using namespace std;
 
 bool extractColumnsFromFile(const string& filename, vector<int>& column1, vector<int>& column2) {
@@ -54,4 +56,29 @@ vector<string> getLines(const string& filename) {
     }
     inputFile.close();
     return vectors;
+}
+
+void ordering(const string& filename, map<int, vector<int>>& greaterToSmaller, vector<vector<int>>& allVariants) {
+    ifstream inputFile(filename);
+    if (!inputFile) {
+        cerr << "Error opening file: " << filename << endl;
+        return;
+    }
+
+    string line;
+    while (getline(inputFile, line)) {
+        vector<int> numbers = extractIntegers(line);
+        if (numbers.empty()) {
+            break;
+        }
+        
+        for (size_t i = 1; i < numbers.size(); i++) {
+            greaterToSmaller[numbers[i]].push_back(numbers[0]);
+        }
+    }
+    while (getline(inputFile, line)) {
+        allVariants.push_back(extractIntegers(line));
+    }
+
+    inputFile.close();
 }

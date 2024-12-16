@@ -3,6 +3,7 @@
 #include <string>
 #include <algorithm>
 #include <regex>
+#include <fstream>
 
 template <typename T>
 void printVec(std::vector<T> vector){
@@ -78,4 +79,21 @@ std::vector<int> extractIntegers(const std::string& input) {
     }
 
     return integers;
+}
+
+void writeVectorToFile(const std::vector<std::string>& lines, const std::string& filename) {
+    std::ofstream outFile(filename); 
+    if (!outFile) {
+        std::cerr << "Error: Could not open file " << filename << " for writing." << std::endl;
+        return;
+    }
+    for (const auto& line : lines) {
+        outFile << line << std::endl;
+    }
+    outFile.close();
+    if (outFile.fail()) {
+        std::cerr << "Error: Failed to write to file " << filename << "." << std::endl;
+    } else {
+        std::cout << "Successfully wrote to " << filename << std::endl;
+    }
 }

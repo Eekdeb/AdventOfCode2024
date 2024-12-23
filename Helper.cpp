@@ -79,3 +79,10 @@ std::vector<int> extractIntegers(const std::string& input) {
 
     return integers;
 }
+
+void print(int number){
+    std::cout << number << std::endl;
+}
+void print(std::string str){
+    std::cout << str << std::endl;
+}

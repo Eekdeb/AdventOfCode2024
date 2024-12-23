@@ -63,7 +63,7 @@ int main() {
     string filename = "input.txt";
     vector<vector<int>> map;
 
-    map = readMap(filename);
+    map = fileToIntGrid(filename);
 
     int safe = countSafeCodes(map);
     cout << "Part1: " << safe << endl;

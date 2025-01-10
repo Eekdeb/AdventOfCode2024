@@ -36,6 +36,30 @@ vector<vector<int>> fileToIntGrid(const string& filename) {
     return vectors;
 }
 
+vector<vector<int>> convertToVectorVectorInt(const string& filename) {
+    vector<vector<int>> result;
+    ifstream file(filename);
+
+    if (!file.is_open()) {
+        cerr << "Error: Could not open file " << filename << endl;
+        return result;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        vector<int> row;
+        for (char ch : line) {
+            if (isdigit(ch)) {
+                row.push_back(ch - '0');
+            }
+        }
+        result.push_back(row);
+    }
+
+    file.close();
+    return result;
+}
+
 vector<string> getLines(const string& filename) {
     vector<string> vectors;
     ifstream inputFile(filename);

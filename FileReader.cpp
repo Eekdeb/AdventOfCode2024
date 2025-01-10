@@ -51,6 +51,14 @@ vector<string> getLines(const string& filename) {
     return vectors;
 }
 
+string getLine(const string& filename) {
+    string line;
+    ifstream inputFile(filename);
+    getline(inputFile, line);
+    inputFile.close();
+    return line;
+}
+
 void ordering(const string& filename, map<int, vector<int>>& greaterToSmaller, vector<vector<int>>& allVariants) {
     ifstream inputFile(filename);
     if (!inputFile) {
